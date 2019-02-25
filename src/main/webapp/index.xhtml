@@ -12,5 +12,9 @@
             <li>#{creature.name}</li>
         </ui:repeat>
     </ol>
+    <h:form>
+        <h:inputText value="#{creatures.creatureToCreate.name}" required="true" />
+        <h:commandButton value="Add new creature" action="#{creatures.createCreature}" />
+    </h:form>
 </h:body>
 </html>

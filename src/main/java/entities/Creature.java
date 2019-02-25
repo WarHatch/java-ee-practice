@@ -7,6 +7,9 @@ import java.util.Objects;
 import lombok.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Creature.findAll", query = "select a from Creature as a")
+})
 @Table(name = "CREATURE")
 public class Creature implements Serializable {
 

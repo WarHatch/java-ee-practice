@@ -3,8 +3,8 @@
     <persistence-unit name="CreaturesPU" transaction-type="JTA">
         <jta-data-source>CreaturesDataSource</jta-data-source>
         <properties>
-            <!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <!--<property name="hibernate.hbm2ddl.auto" value="validate"/>-->
         </properties>
     </persistence-unit>
 </persistence>
