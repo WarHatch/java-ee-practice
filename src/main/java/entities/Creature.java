@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import lombok.*;
 
+@Getter
+@Setter
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Creature.findAll", query = "select a from Creature as a")
@@ -15,11 +17,10 @@ public class Creature implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Size(max = 50)
     @Column(name = "NAME")
-    @Getter
     private String name;
 
     public Creature() {
@@ -27,14 +28,6 @@ public class Creature implements Serializable {
 
     public Creature(String name) {
         this.name = name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     @Override

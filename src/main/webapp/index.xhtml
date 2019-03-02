@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
 >
 <h:head/>
 <h:body>
@@ -10,11 +11,24 @@
     <ol>
         <ui:repeat value="#{creatures.allCreatures}" var="creature">
             <li>#{creature.name}</li>
+            <ol>
+                <ui:repeat value="#{creatures.getCreatureStats(creature.id)}" var="stat">
+                    <li>#{stat.toString()}</li>
+                </ui:repeat>
+            </ol>
         </ui:repeat>
     </ol>
     <h:form>
         <h:inputText value="#{creatures.creatureToCreate.name}" required="true" />
         <h:commandButton value="Add new creature" action="#{creatures.createCreature}" />
+    </h:form>
+    <h:form>
+        <h:inputText value="#{stats.statToCreate.creature.id}" required="true" />
+        <h:inputText value="#{stats.statToCreate.color}" required="true" />
+        <h:inputText value="#{stats.statToCreate.attack}" required="true" />
+        <h:inputText value="#{stats.statToCreate.health}" required="true" />
+        <h:inputText value="#{stats.statToCreate.threat}" required="true" />
+        <h:commandButton value="Add new stat" action="#{stats.createStat}" />
     </h:form>
 </h:body>
 </html>

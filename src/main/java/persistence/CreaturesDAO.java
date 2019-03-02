@@ -6,18 +6,26 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import entities.Creature;
+import entities.Stat;
 
 @ApplicationScoped
 public class CreaturesDAO {
     @PersistenceContext
     private EntityManager em;
 
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
     public List<Creature> loadAll() {
         return em.createNamedQuery("Creature.findAll", Creature.class).getResultList();
     }
 
-    public void setEm(EntityManager em) {
-        this.em = em;
+    public List<Stat> getCreatureStats(int creatureId) {
+        List<Stat> results = em.createNamedQuery("Stat.findAllByCreatureId", Stat.class)
+                .setParameter("creatureId", creatureId)
+                .getResultList();
+        return results;
     }
 
     public void persist(Creature creature) {

@@ -1,6 +1,7 @@
 package usecases;
 
 import entities.Creature;
+import entities.Stat;
 import lombok.Getter;
 import lombok.Setter;
 import persistence.CreaturesDAO;
@@ -30,12 +31,15 @@ public class Creatures implements Serializable {
     }
 
     public void loadCreatures() {
-        // TODO this is a mock implementation - later we will connect it to real data store
         this.allCreatures = creaturesDAO.loadAll();
     }
 
     public List<Creature> getAllCreatures(){
         return allCreatures;
+    }
+
+    public List<Stat> getCreatureStats(int creatureId){
+        return creaturesDAO.getCreatureStats(creatureId);
     }
 
     @Transactional
