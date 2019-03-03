@@ -1,6 +1,5 @@
 package usecases;
 
-import entities.Creature;
 import entities.Stat;
 import lombok.*;
 import persistence.StatsDAO;
