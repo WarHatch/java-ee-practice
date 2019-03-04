@@ -29,30 +29,67 @@ public class Skills implements Serializable {
 
     @Getter
     @Setter
-    private int heroToMapToId;
+    private int heroIdToMapTo;
+
+    @Getter
+    @Setter
+    private int skillIdToMap;
+
+    @Getter
+    @Setter
+    private int heroesSearchSkillId;
 
     @Getter
     private List<Skill> allSkills;
 
+    @Getter
+    private List<Hero> skillHeroes;
+
     @PostConstruct
     public void init(){
         loadSkills();
+        loadSkillHeroes();
+    }
+
+    private Skill getSkillById(int id) {
+        for(Skill sk : allSkills){
+            if(sk.getId() == id)
+                return sk;
+        }
+        return null;
     }
 
     public void loadSkills() {
         this.allSkills = skillsDAO.loadAll();
     }
 
+    public void loadSkillHeroes(){
+        this.skillHeroes = skillsDAO.getSkillHeroes(this.heroesSearchSkillId);
+    }
+
+    @Transactional
     public void mapSkillToHero() {
-        Hero hero = heroes.getHero(this.heroToMapToId);
+        Hero hero = heroes.getHero(this.heroIdToMapTo);
         skillToCreate.addHero(hero);
+        this.skillsDAO.merge(skillToCreate);
+    }
+
+    //FIXME: prevent duplicates on 'HERO_SKILL' table
+    @Transactional
+    public void mapHeroToSkill() {
+        Hero hero = heroes.getHero(this.heroIdToMapTo);
+        Skill skill = this.getSkillById(this.skillIdToMap);
+        skill.addHero(hero);
+        this.skillsDAO.merge(skill);
     }
 
     @Transactional
     public String createSkill(){
         // Hero must use GenerationType.IDENTITY to ensure id starts from 1
-        if (heroToMapToId != 0)
-            mapSkillToHero();
+        if (heroIdToMapTo != 0){
+            Hero hero = heroes.getHero(this.heroIdToMapTo);
+            skillToCreate.addHero(hero);
+        }
         this.skillsDAO.persist(skillToCreate);
         return "success";
     }

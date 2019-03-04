@@ -13,9 +13,11 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@NamedQueries({
+@NamedQueries(value = {
         @NamedQuery(name = "Hero.findAll", query = "select a from Hero as a"),
-        @NamedQuery(name = "Hero.findById", query = "select a from Hero as a where a.id = :heroId")
+        @NamedQuery(name = "Hero.findById", query = "select a from Hero as a where a.id = :heroId"),
+        @NamedQuery(name = "Hero.findAllBySkillId",
+                query = "select distinct he from Hero as he join he.skills as skill join skill.heroes as hero where skill.id = :skillId")
 })
 @Table
 public class Hero extends IdEntity implements Serializable {
@@ -27,6 +29,16 @@ public class Hero extends IdEntity implements Serializable {
     // alliance, horde
     private String faction;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Skill> skills = new ArrayList<>();
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+        skill.getHeroes().add(this);
+    }
+
+    public void removeSkill(Skill skill) {
+        skills.remove(skill);
+        skill.getHeroes().remove(this);
+    }
 }

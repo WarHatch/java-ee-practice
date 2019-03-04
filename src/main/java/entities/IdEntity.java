@@ -15,5 +15,5 @@ import java.io.Serializable;
 public abstract class IdEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    protected int id;
 }

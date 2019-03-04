@@ -24,6 +24,10 @@ public class Heroes implements Serializable {
     private Hero heroToCreate = new Hero();
 
     @Getter
+    @Setter
+    private int heroIdToMapTo;
+
+    @Getter
     private List<Hero> allHeroes;
 
     @PostConstruct

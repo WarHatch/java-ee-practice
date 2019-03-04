@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import entities.Hero;
 import entities.Skill;
 
 @ApplicationScoped
@@ -20,7 +21,17 @@ public class SkillsDAO {
         return em.createNamedQuery("Skill.findAll", Skill.class).getResultList();
     }
 
+    public List<Hero> getSkillHeroes(int skillId) {
+        return em.createNamedQuery("Hero.findAllBySkillId", Hero.class)
+                .setParameter("skillId", skillId)
+                .getResultList();
+    }
+
     public void persist(Skill skill) {
         this.em.persist(skill);
+    }
+
+    public void merge(Skill skill) {
+        this.em.merge(skill);
     }
 }
