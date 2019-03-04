@@ -12,15 +12,17 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@ToString
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Skill.findAll", query = "select a from Skill as a"),
     @NamedQuery(name = "Skill.findAllByHeroId",
-            query = "select sk from Skill as sk join sk.heroes as hero join hero.skills as skill where hero.id = :heroId")
+        query = "select distinct sk from Skill as sk join sk.heroes as hero join hero.skills as skill where hero.id = :heroId")
 })
 @Table
 public class Skill implements Serializable{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(unique = true)
@@ -32,12 +34,8 @@ public class Skill implements Serializable{
     @Size(max = 250)
     private String description;
 
-    @ManyToMany(mappedBy = "skills")
-//    @JoinTable(name = "hero_skill",
-//            joinColumns = @JoinColumn(name = "skill_id"),
-//            inverseJoinColumns = @JoinColumn(name = "hero_id")
-//    )
-    private List<Hero> heroes;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "skills")
+    private List<Hero> heroes = new ArrayList<>();
 
     public void addHero(Hero hero) {
         heroes.add(hero);

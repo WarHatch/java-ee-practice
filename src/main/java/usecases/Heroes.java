@@ -35,6 +35,8 @@ public class Heroes implements Serializable {
         this.allHeroes = heroesDAO.loadAll();
     }
 
+    public Hero getHero(int heroId) { return heroesDAO.loadOne(heroId); }
+
     public List<Skill> getHeroSkills(int heroId){
         return heroesDAO.getHeroSkills(heroId);
     }

@@ -7,6 +7,35 @@
 >
 <h:head/>
 <h:body>
+    <h2>Heroes:</h2>
+    <ol>
+        <ui:repeat value="#{heroes.allHeroes}" var="hero">
+            <li>#{hero.name}</li>
+            <ol>
+                <ui:repeat value="#{heroes.getHeroSkills(hero.id)}" var="skill">
+                    <li>#{skill.toString()}</li>
+                </ui:repeat>
+            </ol>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <p>Must have unique name</p>
+        <h:inputText value="#{heroes.heroToCreate.name}" required="true" />
+        <h:commandButton value="Add new hero" action="#{heroes.createHero}" />
+    </h:form>
+    <h3>Add skill to latest created</h3>
+    <h:form>
+        <p>Hero id</p>
+        <h:inputText value="#{skills.heroToMapToId}" required="true" />
+        <p>Name</p>
+        <h:inputText value="#{skills.skillToCreate.name}" required="true" />
+        <p>description</p>
+        <h:inputText value="#{skills.skillToCreate.description}" required="true" />
+        <p>levelRequirement (optional)</p>
+        <h:inputText value="#{skills.skillToCreate.levelRequirement}" required="false" />
+        <h:commandButton value="Add new stat" action="#{skills.createSkill}" />
+    </h:form>
+
     <h2>Creatures:</h2>
     <ol>
         <ui:repeat value="#{creatures.allCreatures}" var="creature">
@@ -23,13 +52,13 @@
         <h:commandButton value="Add new creature" action="#{creatures.createCreature}" />
     </h:form>
 
-    <h2>Add stats</h2>
+    <h3>Add stats</h3>
     <h:form>
-        <h3>Creature id</h3>
+        <p>Creature id</p>
         <h:inputText value="#{stats.statToCreate.creature.id}" required="true" />
-        <h3>Color</h3>
+        <p>Color</p>
         <h:inputText value="#{stats.statToCreate.color}" required="true" />
-        <h3>threat attack health</h3>
+        <p>threat attack health</p>
         <h:inputText value="#{stats.statToCreate.threat}" required="true" />
         <h:inputText value="#{stats.statToCreate.attack}" required="true" />
         <h:inputText value="#{stats.statToCreate.health}" required="true" />

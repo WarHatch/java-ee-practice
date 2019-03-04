@@ -14,11 +14,13 @@ import lombok.*;
 @EqualsAndHashCode
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Hero.findAll", query = "select a from Hero as a")
+        @NamedQuery(name = "Hero.findAll", query = "select a from Hero as a"),
+        @NamedQuery(name = "Hero.findById", query = "select a from Hero as a where a.id = :heroId")
 })
 @Table
 public class Hero implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(unique = true, nullable = false)
