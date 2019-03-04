@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Stat.findAll", query = "select a from Stat as a"),
@@ -16,12 +16,7 @@ import lombok.*;
             query = "select a from Stat a where a.creature.id = :creatureId")
 })
 @Table
-public class Stat implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class Stat extends IdEntity implements Serializable {
     @Size(max = 50)
     // green, blue, red
     private String color;

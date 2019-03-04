@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString
 @Entity
 @NamedQueries({
@@ -20,11 +20,7 @@ import lombok.*;
         query = "select distinct sk from Skill as sk join sk.heroes as hero join hero.skills as skill where hero.id = :heroId")
 })
 @Table
-public class Skill implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+public class Skill extends IdEntity implements Serializable{
     @Column(unique = true)
     @Size(max = 50)
     private String name;
