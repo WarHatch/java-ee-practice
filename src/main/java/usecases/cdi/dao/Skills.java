@@ -1,4 +1,4 @@
-package usecases;
+package usecases.cdi.dao;
 
 import entities.Hero;
 import entities.Skill;

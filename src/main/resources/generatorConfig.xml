@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <context id="CreaturesDB" targetRuntime="MyBatis3Simple">
+    <jdbcConnection driverClass="org.h2.Driver"
+                    connectionURL="jdbc:h2:~/h2database/CreatureDB;AUTO_SERVER=TRUE"
+                    userId="as"
+                    password="as">
+    </jdbcConnection>
+
+    <javaModelGenerator targetPackage="usecases.mybatis.model" targetProject="MAVEN" />
+
+    <!-- Anotacijų variantas - mažiau galimybių, bet paprastesnis -->
+    <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="usecases.mybatis.dao" targetProject="MAVEN" />
+
+    <!-- XML variantas - daugiau galimybių -->
+    <!--<sqlMapGenerator targetPackage=usecases.mybatis.xml" targetProject="MAVEN" />-->
+    <!--<javaClientGenerator type="XMLMAPPER" targetPackage="usecases.mybatis.dao" targetProject="MAVEN" />-->
+
+
+    <table schema="public" tableName="creature">
+      <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+      <ignoreColumn column="opt_lock_version" />
+    </table>
+    <table schema="public" tableName="stat">
+      <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+      <ignoreColumn column="opt_lock_version" />
+    </table>
+    <table schema="public" tableName="hero">
+      <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+      <ignoreColumn column="opt_lock_version" />
+    </table>
+    <table schema="public" tableName="skill">
+      <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+      <ignoreColumn column="opt_lock_version" />
+    </table>
+    <table schema="public" tableName="hero_skill">
+    </table>
+  </context>
+</generatorConfiguration>
