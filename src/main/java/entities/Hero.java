@@ -3,15 +3,14 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import lombok.*;
 
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude="skills")
 @Entity
 @NamedQueries(value = {
         @NamedQuery(name = "Hero.findAll", query = "select a from Hero as a"),
@@ -30,7 +29,7 @@ public class Hero extends IdEntity implements Serializable {
     private String faction;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Skill> skills = new ArrayList<>();
+    private Set<Skill> skills = new HashSet<>();
 
     public void addSkill(Skill skill) {
         skills.add(skill);

@@ -4,14 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.*;
 
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true,  exclude="heroes")
 @ToString
 @Entity
 @NamedQueries({
@@ -32,7 +34,7 @@ public class Skill extends IdEntity implements Serializable{
     private String description;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "skills")
-    private List<Hero> heroes = new ArrayList<>();
+    private Set<Hero> heroes = new HashSet<>();
 
     public void addHero(Hero hero) {
         heroes.add(hero);
