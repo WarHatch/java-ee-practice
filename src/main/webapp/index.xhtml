@@ -26,36 +26,36 @@
     <h3>Add skill to hero</h3>
     <h:form>
         <p>Hero id</p>
-        <h:inputText value="#{skills.heroIdToMapTo}" required="true" />
+        <h:inputText value="#{heroSkill.hero.id}" required="true" />
         <p>Name</p>
-        <h:inputText value="#{skills.skillToCreate.name}" required="true" />
+        <h:inputText value="#{heroSkill.skill.name}" required="true" />
         <p>description</p>
-        <h:inputText value="#{skills.skillToCreate.description}" required="true" />
+        <h:inputText value="#{heroSkill.skill.description}" required="true" />
         <p>levelRequirement (optional)</p>
-        <h:inputText value="#{skills.skillToCreate.levelRequirement}" required="false" />
-        <h:commandButton value="Add skill" action="#{skills.createSkill}" />
+        <h:inputText value="#{heroSkill.skill.levelRequirement}" required="false" />
+        <h:commandButton value="Add skill" action="#{heroSkill.createSkillOfHero}" />
     </h:form>
 
     <h2>Skills:</h2>
-    <h3>Search for hero that has skill</h3>
+    <h3>Search for heroes that have skill</h3>
     <h:form>
         <p>skill id</p>
-        <h:inputText value="#{skills.heroesSearchSkillId}" required="true" />
-        <h:commandButton value="search" action="#{skills.loadSkillHeroes}" />
-        <p>skill id=#{skills.heroesSearchSkillId} is associated with these heroes:</p>
+        <h:inputText value="#{heroSkill.skill.id}" required="true" />
+        <h:commandButton value="search" action="#{heroSkill.loadHeroesOfSkill}" />
+        <p>skill id=#{heroSkill.skill.id} is associated with these heroes:</p>
         <ol>
-            <ui:repeat value="#{skills.skillHeroes}" var="hero">
+            <ui:repeat value="#{heroSkill.heroesOfSkill}" var="hero">
                 <li>#{hero.toString()}</li>
             </ui:repeat>
         </ol>
     </h:form>
 
-    <h3>Associate hero to skill</h3>
+    <h3>Map hero to skill</h3>
     <h:form>
-        <p>skill id | (to) hero id</p>
-        <h:inputText value="#{skills.skillIdToMap}" required="true" />
-        <h:inputText value="#{skills.heroIdToMapTo}" required="true" />
-        <h:commandButton value="Associate" action="#{skills.mapHeroToSkill}" />
+        <p>skill id (to) hero id</p>
+        <h:inputText value="#{heroSkill.skill.id}" required="true"/>
+        <h:inputText value="#{heroSkill.hero.id}" required="true"/>
+        <h:commandButton value="Map" action="#{heroSkill.mapHeroToSkill}"/>
     </h:form>
 
     <h2>Creatures:</h2>

@@ -16,6 +16,7 @@ import lombok.*;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Skill.findAll", query = "select a from Skill as a"),
+    @NamedQuery(name = "Skill.findById", query = "select a from Skill as a where a.id = :skillId"),
     @NamedQuery(name = "Skill.findAllByHeroId",
         query = "select distinct sk from Skill as sk join sk.heroes as hero join hero.skills as skill where hero.id = :heroId")
 })

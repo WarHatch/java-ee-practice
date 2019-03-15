@@ -1,4 +1,4 @@
-package usecases.cdi.dao;
+package usecases.cdi;
 
 import entities.Creature;
 import entities.Stat;

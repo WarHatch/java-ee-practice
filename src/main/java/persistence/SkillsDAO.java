@@ -21,6 +21,12 @@ public class SkillsDAO {
         return em.createNamedQuery("Skill.findAll", Skill.class).getResultList();
     }
 
+    public Skill loadOne(int skillId) {
+        return em.createNamedQuery("Skill.findById", Skill.class)
+                .setParameter("skillId", skillId)
+                .getSingleResult();
+    }
+
     public List<Hero> getSkillHeroes(int skillId) {
         return em.createNamedQuery("Hero.findAllBySkillId", Hero.class)
                 .setParameter("skillId", skillId)

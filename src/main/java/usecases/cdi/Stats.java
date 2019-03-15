@@ -1,4 +1,4 @@
-package usecases.cdi.dao;
+package usecases.cdi;
 
 import entities.Stat;
 import lombok.*;

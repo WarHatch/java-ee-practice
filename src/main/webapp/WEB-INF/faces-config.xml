@@ -20,11 +20,5 @@
             <to-view-id>/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-        <navigation-case>
-            <from-action>#{skills.mapSkillToHero}</from-action>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
     </navigation-rule>
 </faces-config>
