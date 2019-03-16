@@ -7,6 +7,8 @@
 >
 <h:head/>
 <h:body>
+    <h:button value="to Creatures" outcome="toCreatures" />
+
     <h2>Heroes:</h2>
     <ol>
         <ui:repeat value="#{heroes.allHeroes}" var="hero">
@@ -56,35 +58,6 @@
         <h:inputText value="#{heroSkill.skill.id}" required="true"/>
         <h:inputText value="#{heroSkill.hero.id}" required="true"/>
         <h:commandButton value="Map" action="#{heroSkill.mapHeroToSkill}"/>
-    </h:form>
-
-    <h2>Creatures:</h2>
-    <ol>
-        <ui:repeat value="#{creatures.allCreatures}" var="creature">
-            <li>#{creature.name}</li>
-            <ol>
-                <ui:repeat value="#{creatures.getCreatureStats(creature.id)}" var="stat">
-                    <li>#{stat.toString()}</li>
-                </ui:repeat>
-            </ol>
-        </ui:repeat>
-    </ol>
-    <h:form>
-        <h:inputText value="#{creatures.creatureToCreate.name}" required="true" />
-        <h:commandButton value="Add new creature" action="#{creatures.createCreature}" />
-    </h:form>
-
-    <h3>Add stats</h3>
-    <h:form>
-        <p>Creature id</p>
-        <h:inputText value="#{stats.statToCreate.creature.id}" required="true" />
-        <p>Color</p>
-        <h:inputText value="#{stats.statToCreate.color}" required="true" />
-        <p>threat attack health</p>
-        <h:inputText value="#{stats.statToCreate.threat}" required="true" />
-        <h:inputText value="#{stats.statToCreate.attack}" required="true" />
-        <h:inputText value="#{stats.statToCreate.health}" required="true" />
-        <h:commandButton value="Add new stat" action="#{stats.createStat}" />
     </h:form>
 </h:body>
 </html>
