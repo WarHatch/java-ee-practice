@@ -101,4 +101,15 @@ public interface StatMapper {
         "where ID = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Stat record);
+
+    @Select("SELECT * FROM PUBLIC.STAT WHERE CREATURE_ID = #{creatureId}")
+    @Results(value = {
+            @Result(column="ID", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="ATTACK", property="attack", jdbcType=JdbcType.SMALLINT),
+            @Result(column="COLOR", property="color", jdbcType=JdbcType.VARCHAR),
+            @Result(column="HEALTH", property="health", jdbcType=JdbcType.SMALLINT),
+            @Result(column="THREAT", property="threat", jdbcType=JdbcType.SMALLINT),
+            @Result(column="CREATURE_ID", property="creatureId", jdbcType=JdbcType.INTEGER)
+    })
+    public List<Stat> selectAllByCreaturePrimaryKey(int creatureId);
 }

@@ -7,9 +7,11 @@
 >
 <h:head/>
 <h:body>
+    <h1>My Batis</h1>
+
     <h2>Creatures:</h2>
     <ol>
-        <ui:repeat value="#{creatures.allCreatures}" var="creature">
+        <ui:repeat value="#{creatureWithStat.allCreatures}" var="creature">
             <li>#{creature.name}</li>
             <ol>
                 <ui:repeat value="#{creatures.getCreatureStats(creature.id)}" var="stat">
@@ -18,22 +20,25 @@
             </ol>
         </ui:repeat>
     </ol>
+
     <h:form>
-        <h:inputText value="#{creatures.creatureToCreate.name}" required="true" />
-        <h:commandButton value="Add new creature" action="#{creatures.createCreature}" />
+        <h:inputText value="#{creatureWithStat.creatureToCreate.name}" required="true" />
+        <h:commandButton value="Add new creature" action="#{creatureWithStat.createCreature}" />
     </h:form>
 
     <h3>Add stats</h3>
     <h:form>
         <p>Creature id</p>
-        <h:inputText value="#{stats.statToCreate.creature.id}" required="true" />
+        <h:inputText value="#{creatureWithStat.statToCreate.creatureId}" required="true" />
         <p>Color</p>
-        <h:inputText value="#{stats.statToCreate.color}" required="true" />
+        <h:inputText value="#{creatureWithStat.statToCreate.color}" required="true" />
         <p>threat attack health</p>
-        <h:inputText value="#{stats.statToCreate.threat}" required="true" />
-        <h:inputText value="#{stats.statToCreate.attack}" required="true" />
-        <h:inputText value="#{stats.statToCreate.health}" required="true" />
-        <h:commandButton value="Add new stat" action="#{stats.createStat}" />
+        <h:panelGrid columns="3">
+            <h:inputText value="#{creatureWithStat.statToCreate.threat}" required="true" />
+            <h:inputText value="#{creatureWithStat.statToCreate.attack}" required="true" />
+            <h:inputText value="#{creatureWithStat.statToCreate.health}" required="true" />
+        <h:commandButton value="Add new stat" action="#{creatureWithStat.createStat}" />
+        </h:panelGrid>
     </h:form>
 </h:body>
 </html>

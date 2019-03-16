@@ -1,4 +1,4 @@
-package usecases.cdi;
+package usecases.cdi.jpa;
 
 import entities.Stat;
 import lombok.*;

@@ -19,8 +19,9 @@
       </dataSource>
     </environment>
   </environments>
-  <!--<mappers>-->
+  <mappers>
     <!--<mapper resource="mybatis/xml/UniversityMapper.xml"/>-->
     <!--<mapper resource="mybatis/xml/StudentCourseMapper.xml"/>-->
-  <!--</mappers>-->
+    <package name="usecases.mybatis.dao"/>
+  </mappers>
 </configuration>
