@@ -1,4 +1,4 @@
-package usecases.mybatis.model;
+package mybatis.model;
 
 public class Creature {
     /**

@@ -4,11 +4,11 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias type="usecases.mybatis.model.Creature" alias="Creature"/>
-    <typeAlias type="usecases.mybatis.model.Hero" alias="Hero"/>
-    <typeAlias type="usecases.mybatis.model.Skill" alias="Skill"/>
-    <typeAlias type="usecases.mybatis.model.Stat" alias="Stat"/>
-    <typeAlias type="usecases.mybatis.model.HeroSkill" alias="HeroSkill"/>
+    <typeAlias type="mybatis.model.Creature" alias="Creature"/>
+    <typeAlias type="mybatis.model.Hero" alias="Hero"/>
+    <typeAlias type="mybatis.model.Skill" alias="Skill"/>
+    <typeAlias type="mybatis.model.Stat" alias="Stat"/>
+    <typeAlias type="mybatis.model.HeroSkill" alias="HeroSkill"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -22,6 +22,6 @@
   <mappers>
     <!--<mapper resource="mybatis/xml/UniversityMapper.xml"/>-->
     <!--<mapper resource="mybatis/xml/StudentCourseMapper.xml"/>-->
-    <package name="usecases.mybatis.dao"/>
+    <package name="mybatis.dao"/>
   </mappers>
 </configuration>

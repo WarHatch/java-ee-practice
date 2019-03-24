@@ -1,7 +1,7 @@
 package usecases.cdi.myBatis;
 
-import usecases.mybatis.dao.*;
-import usecases.mybatis.model.*;
+import mybatis.dao.*;
+import mybatis.model.*;
 
 import lombok.Getter;
 import javax.annotation.PostConstruct;
@@ -25,7 +25,7 @@ public class CreatureWithStat implements Serializable {
     private Stat statToCreate = new Stat();
 
     @Getter
-    private List<entities.Stat> creatureStats;
+    private List<Stat> creatureStats;
     @Getter
     private List<Creature> allCreatures;
 
@@ -36,18 +36,6 @@ public class CreatureWithStat implements Serializable {
 
     public void loadCreatures() {
         this.allCreatures = creatureMapper.selectAll();
-    }
-
-    public List<Creature> getAllCreatures(){
-        return allCreatures;
-    }
-
-//    public List<entities.Stat> getAllStats(){
-//        return allStats;
-//    }
-
-    public List<Stat> getCreatureStats(int creatureId){
-        return statMapper.selectAllByCreaturePrimaryKey(creatureId);
     }
 
     @Transactional

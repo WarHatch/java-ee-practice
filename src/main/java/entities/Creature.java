@@ -16,7 +16,6 @@ import lombok.*;
 @Table
 public class Creature extends IdEntity implements Serializable {
     @Size(max = 50)
-    @Column(name = "NAME")
     private String name;
 
     public Creature(String name) {

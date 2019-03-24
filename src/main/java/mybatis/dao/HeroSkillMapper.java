@@ -1,4 +1,4 @@
-package usecases.mybatis.dao;
+package mybatis.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Insert;
@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.cdi.Mapper;
-import usecases.mybatis.model.HeroSkill;
+import mybatis.model.HeroSkill;
 @Mapper
 public interface HeroSkillMapper {
     /**
