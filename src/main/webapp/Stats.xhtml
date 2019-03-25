@@ -8,6 +8,8 @@
 >
 <h:head/>
 <h:body>
+    <h:button value="to Creatures" outcome="toCreatures"/>
+
     <p>For version locking demo</p>
     <h1>Stats</h1>
     <p:commandButton value="Refresh" icon="ui-icon-arrowrefresh-1-e"
@@ -19,10 +21,10 @@
             <p:dataTable value="#{updateStat.allStats}" var="stat"
                          tableStyle="table-layout: auto">
                 <p:column headerText="Stat">
-                    #{stat.id}. health:#{stat.health}, threat:#{stat.threat}, attaack:#{stat.threat}
+                    #{stat.id}. health:#{stat.health}, threat:#{stat.threat}, attack:#{stat.threat}
                 </p:column>
                 <p:column headerText="Belongs to creature">
-                    #{stat.creatureId}
+                    #{stat.creature.id}
                 </p:column>
                 <p:column>
                     <p:commandButton value="Edit" icon="ui-icon-pencil"
@@ -46,7 +48,7 @@
                     <p:message for="color"/>
 
                     <p:outputLabel for="creature" value="creature:"/>
-                    <p:selectOneMenu id="creature" value="#{updateStat.statToUpdate.creatureId}"
+                    <p:selectOneMenu id="creature" value="#{updateStat.statToUpdate.creature.id}"
                                      converter="omnifaces.SelectItemsIndexConverter">
                         <f:selectItem itemLabel="Select creature:" itemValue="#{null}"/>
                         <f:selectItems value="#{updateStat.allCreatures}" var="creature"
@@ -73,7 +75,7 @@
                     <h:outputText value="#{updateStat.conflictingStat.color}"/>
 
                     <h:outputText value="creeatureId:"/>
-                    <h:outputText value="#{updateStat.conflictingStat.creatureId}"/>
+                    <h:outputText value="#{updateStat.conflictingStat.creature.id}"/>
 
                     <h:outputText value="Opt. version:"/>
                     <h:outputText value="#{updateStat.conflictingStat.optLockVersion}"

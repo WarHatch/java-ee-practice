@@ -1,10 +1,11 @@
-package usecases.cdi.myBatis;
+package usecases.cdi.jpa;
+
+import entities.Creature;
+import entities.Stat;
+import persistence.CreaturesDAO;
+import persistence.StatsDAO;
 
 import lombok.Getter;
-import mybatis.dao.CreatureMapper;
-import mybatis.dao.StatMapper;
-import mybatis.model.Creature;
-import mybatis.model.Stat;
 import org.primefaces.context.RequestContext;
 
 import javax.annotation.PostConstruct;
@@ -18,9 +19,9 @@ import java.util.List;
 @Model //Req scoped and Named
 public class UpdateStat implements Serializable {
     @Inject
-    private CreatureMapper creatureMapper;
+    private CreaturesDAO creaturesDAO;
     @Inject
-    private StatMapper statMapper;
+    private StatsDAO statsDAO;
 
     @Getter
     private Stat statToUpdate = new Stat();
@@ -33,13 +34,13 @@ public class UpdateStat implements Serializable {
     private List<Creature> allCreatures;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         loadAll();
     }
 
     public void loadAll() {
-        this.allCreatures = creatureMapper.selectAll();
-        this.allStats = statMapper.selectAll();
+        this.allCreatures = creaturesDAO.loadAll();
+        this.allStats = statsDAO.loadAll();
     }
 
     public void prepareForEditing(Stat stat) {
@@ -50,10 +51,10 @@ public class UpdateStat implements Serializable {
     @Transactional
     public void updateSelectedStat() {
         try {
-            statMapper.updateByPrimaryKey(statToUpdate);
+            statsDAO.updateAndFlush(statToUpdate);
             loadAll();
         } catch (OptimisticLockException ole) {
-            conflictingStat = statMapper.selectByPrimaryKey(statToUpdate.getId());
+            conflictingStat = statsDAO.loadById(statToUpdate.getId());
             // Pranešam PrimeFaces dialogui, kad užsidaryti dar negalima:
             RequestContext.getCurrentInstance().addCallbackParam("validationFailed", true);
         }
@@ -65,3 +66,4 @@ public class UpdateStat implements Serializable {
         updateSelectedStat();
     }
 }
+
