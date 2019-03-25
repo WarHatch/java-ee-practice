@@ -5,6 +5,7 @@ import mybatis.dao.CreatureMapper;
 import mybatis.dao.StatMapper;
 import mybatis.model.Creature;
 import mybatis.model.Stat;
+import org.primefaces.context.RequestContext;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -14,7 +15,7 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-@Model
+@Model //Req scoped and Named
 public class UpdateStat implements Serializable {
     @Inject
     private CreatureMapper creatureMapper;
@@ -41,21 +42,26 @@ public class UpdateStat implements Serializable {
         this.allStats = statMapper.selectAll();
     }
 
+    public void prepareForEditing(Stat stat) {
+        statToUpdate = stat;
+        conflictingStat = null;
+    }
+
     @Transactional
-    public void updateSelectedStudent() {
+    public void updateSelectedStat() {
         try {
             statMapper.updateByPrimaryKey(statToUpdate);
             loadAll();
         } catch (OptimisticLockException ole) {
             conflictingStat = statMapper.selectByPrimaryKey(statToUpdate.getId());
             // Pranešam PrimeFaces dialogui, kad užsidaryti dar negalima:
-//            RequestContext.getCurrentInstance().addCallbackParam("validationFailed", true);
+            RequestContext.getCurrentInstance().addCallbackParam("validationFailed", true);
         }
     }
 
     @Transactional
     public void overwriteStat() {
         statToUpdate.setOptLockVersion(conflictingStat.getOptLockVersion());
-        updateSelectedStudent();
+        updateSelectedStat();
     }
 }

@@ -3,16 +3,92 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
 >
 <h:head/>
 <h:body>
-    <h1>Creatures:</h1>
     <p>For version locking demo</p>
-    <ol>
-        <ui:repeat value="#{updateStat.allStats}" var="stat">
-            <li>#{stat.toString()}</li>
-        </ui:repeat>
-    </ol>
+    <h1>Stats</h1>
+    <p:commandButton value="Refresh" icon="ui-icon-arrowrefresh-1-e"
+                     actionListener="#{updateStat.loadAll()}"
+                     update=":form:list"/>
+
+    <h:form id="form">
+        <p:fieldset id="list" style="width: 50%">
+            <p:dataTable value="#{updateStat.allStats}" var="stat"
+                         tableStyle="table-layout: auto">
+                <p:column headerText="Stat">
+                    #{stat.id}. health:#{stat.health}, threat:#{stat.threat}, attaack:#{stat.threat}
+                </p:column>
+                <p:column headerText="Belongs to creature">
+                    #{stat.creatureId}
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Edit" icon="ui-icon-pencil"
+                                     actionListener="#{updateStat.prepareForEditing(stat)}"
+                                     update=":form:statDetail"
+                                     oncomplete="PF('statDialog').show()"/>
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+
+        <p:dialog header="Edit Stat" widgetVar="statDialog" modal="true" closable="true" resizable="false"
+                  closeOnEscape="true">
+            <p:outputPanel id="statDetail">
+                <h:outputText value="No stat was selected... Weird..."
+                              rendered="#{empty updateStat.statToUpdate}"/>
+                <p:panelGrid columns="3"
+                             rendered="#{not empty updateStat.statToUpdate}"
+                             columnClasses="label,value" styleClass="ui-noborder"> <!-- unnecesarry? -->
+                    <p:outputLabel for="color" value="color:"/>
+                    <p:inputText id="color" value="#{updateStat.statToUpdate.color}"/>
+                    <p:message for="color"/>
+
+                    <p:outputLabel for="creature" value="creature:"/>
+                    <p:selectOneMenu id="creature" value="#{updateStat.statToUpdate.creatureId}"
+                                     converter="omnifaces.SelectItemsIndexConverter">
+                        <f:selectItem itemLabel="Select creature:" itemValue="#{null}"/>
+                        <f:selectItems value="#{updateStat.allCreatures}" var="creature"
+                                       itemLabel="#{creature.name}" itemValue="#{creature.id}"/>
+                    </p:selectOneMenu>
+                    <p:message for="creature"/>
+
+                    <h:outputText value="Opt. version:"/>
+                    <h:outputText value="#{updateStat.statToUpdate.optLockVersion}"
+                                  style="font-weight: bold"/>
+                </p:panelGrid>
+
+                <p:commandButton value="Update" actionListener="#{updateStat.updateSelectedStat}"
+                                 rendered="#{empty updateStat.conflictingStat}"
+                                 icon="ui-icon-check" style="margin-top: 1em"
+                                 update=":form:statDetail :form:list"
+                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('statDialog').hide()"/>
+
+                <p:panelGrid columns="2" rendered="#{not empty updateStat.conflictingStat}"
+                             columnClasses="label,value" styleClass="ui-noborder" style="margin-top: 1em">
+                    <f:facet name="header">Conflicting stat</f:facet>
+
+                    <h:outputText value="color:"/>
+                    <h:outputText value="#{updateStat.conflictingStat.color}"/>
+
+                    <h:outputText value="creeatureId:"/>
+                    <h:outputText value="#{updateStat.conflictingStat.creatureId}"/>
+
+                    <h:outputText value="Opt. version:"/>
+                    <h:outputText value="#{updateStat.conflictingStat.optLockVersion}"
+                                  style="font-weight: bold"/>
+                </p:panelGrid>
+
+                <p:commandButton value="Overwrite" actionListener="#{updateStat.overwriteStat}"
+                                 rendered="#{not empty updateStat.conflictingStat}"
+                                 icon="ui-icon-notice" style="margin-top: 1em"
+                                 update=":form:statDetail :form:list"
+                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('statDialog').hide()"/>
+            </p:outputPanel>
+        </p:dialog>
+
+        <p:messages globalOnly="true"/>
+    </h:form>
 </h:body>
 </html>
