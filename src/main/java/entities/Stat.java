@@ -27,6 +27,9 @@ public class Stat extends IdEntity implements Serializable {
 
     private short health;
 
+    @Version
+    private Integer optLockVersion;
+
     @ManyToOne
     @JoinColumn(name = "creature_id")
     private Creature creature = new Creature();

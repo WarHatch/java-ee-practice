@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head/>
+<h:body>
+    <h1>Creatures:</h1>
+    <p>For version locking demo</p>
+    <ol>
+        <ui:repeat value="#{updateStat.allStats}" var="stat">
+            <li>#{stat.toString()}</li>
+        </ui:repeat>
+    </ol>
+</h:body>
+</html>

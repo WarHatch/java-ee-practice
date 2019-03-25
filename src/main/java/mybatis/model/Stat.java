@@ -1,5 +1,11 @@
 package mybatis.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Version;
+
 public class Stat {
     /**
      *
@@ -198,4 +204,7 @@ public class Stat {
     public void setCreatureId(Integer creatureId) {
         this.creatureId = creatureId;
     }
+
+    @Getter @Setter
+    private Integer optLockVersion;
 }
