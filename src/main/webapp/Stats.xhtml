@@ -14,9 +14,8 @@
     <h1>Stats</h1>
     <p:commandButton value="Refresh" icon="ui-icon-arrowrefresh-1-e"
                      actionListener="#{updateStat.loadAll()}"
-                     update=":form:list"/>
+                     update=":list"/>
 
-    <h:form id="form">
         <p:fieldset id="list" style="width: 50%">
             <p:dataTable value="#{updateStat.allStats}" var="stat"
                          tableStyle="table-layout: auto">
@@ -35,62 +34,64 @@
             </p:dataTable>
         </p:fieldset>
 
+    <!--This is treated as a separate request!-->
         <p:dialog header="Edit Stat" widgetVar="statDialog" modal="true" closable="true" resizable="false"
                   closeOnEscape="true">
-            <p:outputPanel id="statDetail">
-                <h:outputText value="No stat was selected... Weird..."
-                              rendered="#{empty updateStat.statToUpdate}"/>
-                <p:panelGrid columns="3"
-                             rendered="#{not empty updateStat.statToUpdate}"
-                             columnClasses="label,value" styleClass="ui-noborder"> <!-- unnecesarry? -->
-                    <p:outputLabel for="color" value="color:"/>
-                    <p:inputText id="color" value="#{updateStat.statToUpdate.color}"/>
-                    <p:message for="color"/>
+            <h:form id="form">
+                <p:outputPanel id="statDetail">
+                    <h:outputText value="No stat was selected... Weird..."
+                                  rendered="#{empty updateStat.statToUpdate}"/>
+                    <p:panelGrid columns="3"
+                                 rendered="#{not empty updateStat.statToUpdate}"
+                                 columnClasses="label,value" styleClass="ui-noborder"> <!-- unnecesarry? -->
+                        <p:outputLabel for="color" value="color:"/>
+                        <p:inputText id="color" value="#{updateStat.statToUpdate.color}"/>
+                        <p:message for="color"/>
 
-                    <p:outputLabel for="creature" value="creature:"/>
-                    <p:selectOneMenu id="creature" value="#{updateStat.statToUpdate.creature.id}"
-                                     converter="omnifaces.SelectItemsIndexConverter">
-                        <f:selectItem itemLabel="Select creature:" itemValue="#{null}"/>
-                        <f:selectItems value="#{updateStat.allCreatures}" var="creature"
-                                       itemLabel="#{creature.name}" itemValue="#{creature.id}"/>
-                    </p:selectOneMenu>
-                    <p:message for="creature"/>
+                        <p:outputLabel for="creature" value="creature:"/>
+                        <p:selectOneMenu id="creature" value="#{updateStat.statToUpdate.creature.id}"
+                                         converter="omnifaces.SelectItemsIndexConverter">
+                            <f:selectItem itemLabel="Select creature:" itemValue="#{null}"/>
+                            <f:selectItems value="#{updateStat.allCreatures}" var="creature"
+                                           itemLabel="#{creature.name}" itemValue="#{creature.id}"/>
+                        </p:selectOneMenu>
+                        <p:message for="creature"/>
 
-                    <h:outputText value="Opt. version:"/>
-                    <h:outputText value="#{updateStat.statToUpdate.optLockVersion}"
-                                  style="font-weight: bold"/>
-                </p:panelGrid>
+                        <h:outputText value="Opt. version:"/>
+                        <h:outputText value="#{updateStat.statToUpdate.optLockVersion}"
+                                      style="font-weight: bold"/>
+                    </p:panelGrid>
 
-                <p:commandButton value="Update" actionListener="#{updateStat.updateSelectedStat}"
-                                 rendered="#{empty updateStat.conflictingStat}"
-                                 icon="ui-icon-check" style="margin-top: 1em"
-                                 update=":form:statDetail :form:list"
-                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('statDialog').hide()"/>
+                    <p:commandButton value="Update" actionListener="#{updateStat.updateSelectedStat}"
+                                     rendered="#{empty updateStat.conflictingStat}"
+                                     icon="ui-icon-check" style="margin-top: 1em"
+                                     update=":form:statDetail :list"
+                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('statDialog').hide()"/>
 
-                <p:panelGrid columns="2" rendered="#{not empty updateStat.conflictingStat}"
-                             columnClasses="label,value" styleClass="ui-noborder" style="margin-top: 1em">
-                    <f:facet name="header">Conflicting stat</f:facet>
+                    <p:panelGrid columns="2" rendered="#{not empty updateStat.conflictingStat}"
+                                 columnClasses="label,value" styleClass="ui-noborder" style="margin-top: 1em">
+                        <f:facet name="header">Conflicting stat</f:facet>
 
-                    <h:outputText value="color:"/>
-                    <h:outputText value="#{updateStat.conflictingStat.color}"/>
+                        <h:outputText value="color:"/>
+                        <h:outputText value="#{updateStat.conflictingStat.color}"/>
 
-                    <h:outputText value="creeatureId:"/>
-                    <h:outputText value="#{updateStat.conflictingStat.creature.id}"/>
+                        <h:outputText value="creatureId:"/>
+                        <h:outputText value="#{updateStat.conflictingStat.creature.id}"/>
 
-                    <h:outputText value="Opt. version:"/>
-                    <h:outputText value="#{updateStat.conflictingStat.optLockVersion}"
-                                  style="font-weight: bold"/>
-                </p:panelGrid>
+                        <h:outputText value="Opt. version:"/>
+                        <h:outputText value="#{updateStat.conflictingStat.optLockVersion}"
+                                      style="font-weight: bold"/>
+                    </p:panelGrid>
 
-                <p:commandButton value="Overwrite" actionListener="#{updateStat.overwriteStat}"
-                                 rendered="#{not empty updateStat.conflictingStat}"
-                                 icon="ui-icon-notice" style="margin-top: 1em"
-                                 update=":form:statDetail :form:list"
-                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('statDialog').hide()"/>
-            </p:outputPanel>
+                    <p:commandButton value="Overwrite" actionListener="#{updateStat.overwriteStat}"
+                                     rendered="#{not empty updateStat.conflictingStat}"
+                                     icon="ui-icon-notice" style="margin-top: 1em"
+                                     update=":form:statDetail :list"
+                                     oncomplete="if (args &amp;&amp; !args.validationFailed) PF('statDialog').hide()"/>
+                </p:outputPanel>
+            </h:form>
         </p:dialog>
 
         <p:messages globalOnly="true"/>
-    </h:form>
 </h:body>
 </html>

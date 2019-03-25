@@ -2,6 +2,7 @@ package usecases.cdi.jpa;
 
 import entities.Creature;
 import entities.Stat;
+import org.omnifaces.cdi.ViewScoped;
 import persistence.CreaturesDAO;
 import persistence.StatsDAO;
 
@@ -11,12 +12,15 @@ import org.primefaces.context.RequestContext;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-@Model //Req scoped and Named
+//@Model //Req scoped and Named
+@Named
+@ViewScoped
 public class UpdateStat implements Serializable {
     @Inject
     private CreaturesDAO creaturesDAO;

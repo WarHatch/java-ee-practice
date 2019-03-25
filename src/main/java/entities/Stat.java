@@ -3,6 +3,7 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+
 import lombok.*;
 
 @NoArgsConstructor
@@ -15,8 +16,8 @@ import lombok.*;
                 query = "select a from Stat as a"),
         @NamedQuery(name = "Stat.findById",
                 query = "select a from Stat a where a.id = :id"),
-    @NamedQuery(name = "Stat.findAllByCreatureId",
-            query = "select a from Stat a where a.creature.id = :creatureId")
+        @NamedQuery(name = "Stat.findAllByCreatureId",
+                query = "select a from Stat a where a.creature.id = :creatureId")
 })
 @Table
 public class Stat extends IdEntity implements Serializable {
