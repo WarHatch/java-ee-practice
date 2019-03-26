@@ -21,7 +21,18 @@ public class StatsDAO {
         return em.createNamedQuery("Stat.findAll", Stat.class).getResultList();
     }
 
+    public Stat loadById(int id) {
+        return em.createNamedQuery("Stat.findById", Stat.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
     public void persist(Stat stat) {
         this.em.persist(stat);
+    }
+
+    public void updateAndFlush(Stat stat) {
+        em.merge(stat);
+        em.flush();
     }
 }

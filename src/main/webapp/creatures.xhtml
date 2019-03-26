@@ -11,10 +11,10 @@
 
     <h2>Creatures:</h2>
     <ol>
-        <ui:repeat value="#{creatureWithStat.allCreatures}" var="creature">
+        <ui:repeat value="#{creatures.allCreatures}" var="creature">
             <li>#{creature.name}</li>
             <ol>
-                <ui:repeat value="#{creatures.getCreatureStats(creature.id)}" var="stat">
+                <ui:repeat value="#{creatures.freshCreatureStats(creature.id)}" var="stat">
                     <li>#{stat.toString()}</li>
                 </ui:repeat>
             </ol>
@@ -22,22 +22,22 @@
     </ol>
 
     <h:form>
-        <h:inputText value="#{creatureWithStat.creatureToCreate.name}" required="true" />
-        <h:commandButton value="Add new creature" action="#{creatureWithStat.createCreature}" />
+        <h:inputText value="#{creatures.creatureToCreate.name}" required="true"/>
+        <h:commandButton value="Add new creature" action="#{creatures.createCreature}"/>
     </h:form>
 
     <h3>Add stats</h3>
     <h:form>
         <p>Creature id</p>
-        <h:inputText value="#{creatureWithStat.statToCreate.creatureId}" required="true" />
+        <h:inputText value="#{creatures.statToCreate.creature.id}" required="true"/>
         <p>Color</p>
-        <h:inputText value="#{creatureWithStat.statToCreate.color}" required="true" />
+        <h:inputText value="#{creatures.statToCreate.color}" required="true"/>
         <p>threat attack health</p>
         <h:panelGrid columns="3">
-            <h:inputText value="#{creatureWithStat.statToCreate.threat}" required="true" />
-            <h:inputText value="#{creatureWithStat.statToCreate.attack}" required="true" />
-            <h:inputText value="#{creatureWithStat.statToCreate.health}" required="true" />
-        <h:commandButton value="Add new stat" action="#{creatureWithStat.createStat}" />
+            <h:inputText value="#{creatures.statToCreate.threat}" required="true"/>
+            <h:inputText value="#{creatures.statToCreate.attack}" required="true"/>
+            <h:inputText value="#{creatures.statToCreate.health}" required="true"/>
+            <h:commandButton value="Add new stat" action="#{creatures.createStat}"/>
         </h:panelGrid>
     </h:form>
 </h:body>

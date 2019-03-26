@@ -21,7 +21,7 @@ public class CreaturesDAO {
         return em.createNamedQuery("Creature.findAll", Creature.class).getResultList();
     }
 
-    public List<Stat> getCreatureStats(int creatureId) {
+    public List<Stat> loadCreatureStats(int creatureId) {
         List<Stat> results = em.createNamedQuery("Stat.findAllByCreatureId", Stat.class)
                 .setParameter("creatureId", creatureId)
                 .getResultList();
