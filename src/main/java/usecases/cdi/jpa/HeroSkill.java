@@ -21,10 +21,11 @@ public class HeroSkill {
     @Inject
     private HeroesDAO heroesDAO;
 
+    @Inject
+    @Getter
+    private Skill skill;
     @Getter
     private Hero hero = new Hero();
-    @Getter
-    private Skill skill = new Skill();
 
     @Getter
     private List<Hero> heroesOfSkill;

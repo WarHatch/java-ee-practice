@@ -1,14 +1,12 @@
 package entities;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import lombok.*;
 
 @NoArgsConstructor
 @Getter
@@ -26,15 +24,17 @@ import lombok.*;
 public class Skill extends IdEntity implements Serializable{
     @Column(unique = true)
     @Size(max = 50)
-    private String name;
+    protected String name;
 
-    private byte levelRequirement;
+    protected byte levelRequirement;
 
     @Size(max = 250)
-    private String description;
+    protected String description;
+
+    protected String pictureUrl;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "skills")
-    private Set<Hero> heroes = new HashSet<>();
+    protected Set<Hero> heroes = new HashSet<>();
 
     public void addHero(Hero hero) {
         heroes.add(hero);
