@@ -6,7 +6,7 @@
     <!-- H2 Database -->
     <Resource id="BoardgameDataSource" type="DataSource">
         JdbcDriver = org.h2.Driver
-        JdbcUrl = jdbc:h2:~/h2database/CreatureDB;AUTO_SERVER=TRUE;
+        JdbcUrl = jdbc:h2:~/h2database/BoardgameDB;AUTO_SERVER=TRUE;
         UserName = as
         Password = as
         InitialSize = 1

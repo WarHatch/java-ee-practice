@@ -11,7 +11,7 @@ import entities.Stat;
 @ApplicationScoped
 public class CreaturesDAO {
     @PersistenceContext
-    private EntityManager em;
+    protected EntityManager em;
 
     public void setEm(EntityManager em) {
         this.em = em;
@@ -30,5 +30,9 @@ public class CreaturesDAO {
 
     public void persist(Creature creature) {
         this.em.persist(creature);
+    }
+
+    public void merge(Creature creature) {
+        this.em.merge(creature);
     }
 }

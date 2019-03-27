@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 
 import org.omnifaces.cdi.ViewScoped;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
