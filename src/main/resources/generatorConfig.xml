@@ -6,7 +6,7 @@
 <generatorConfiguration>
   <context id="CreaturesDB" targetRuntime="MyBatis3Simple">
     <jdbcConnection driverClass="org.h2.Driver"
-                    connectionURL="jdbc:h2:~/h2database/CreatureDB;AUTO_SERVER=TRUE"
+                    connectionURL="jdbc:h2:~/h2database/BoardgameDB;AUTO_SERVER=TRUE"
                     userId="as"
                     password="as">
     </jdbcConnection>

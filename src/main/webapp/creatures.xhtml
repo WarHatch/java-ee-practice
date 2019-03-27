@@ -4,17 +4,20 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
 >
 <h:head/>
 <h:body>
     <h1>My Batis</h1>
 
     <h2>Creatures:</h2>
+    <p>#{creatures.asyncCreatureCount}</p>
+
     <ol>
         <ui:repeat value="#{creatures.allCreatures}" var="creature">
             <li>#{creature.name}</li>
             <ol>
-                <ui:repeat value="#{creatures.freshCreatureStats(creature.id)}" var="stat">
+                <ui:repeat value="#{creatures.getFreshCreatureStats(creature.id)}" var="stat">
                     <li>#{stat.toString()}</li>
                 </ui:repeat>
             </ol>

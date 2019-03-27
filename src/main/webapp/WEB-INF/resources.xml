@@ -4,7 +4,7 @@
     <!-- see http://tomee.apache.org/datasource-config.html -->
 
     <!-- H2 Database -->
-    <Resource id="CreaturesDataSource" type="DataSource">
+    <Resource id="BoardgameDataSource" type="DataSource">
         JdbcDriver = org.h2.Driver
         JdbcUrl = jdbc:h2:~/h2database/CreatureDB;AUTO_SERVER=TRUE;
         UserName = as

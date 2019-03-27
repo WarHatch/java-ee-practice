@@ -11,7 +11,8 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Creature.findAll", query = "select a from Creature as a")
+        @NamedQuery(name = "Creature.findAll", query = "select a from Creature as a"),
+        @NamedQuery(name = "Creature.count", query = "select count(a) from Creature as a")
 })
 @Table
 public class Creature extends IdEntity implements Serializable {
