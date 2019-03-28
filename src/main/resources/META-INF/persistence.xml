@@ -4,8 +4,8 @@
     <jta-data-source>BoardgameDataSource</jta-data-source>
         <properties>
           <!--TODO: set this according to your needs-->
-          <property name="hibernate.hbm2ddl.auto" value="create"/>
-          <!--<property name="hibernate.hbm2ddl.auto" value="validate"/>-->
+          <!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
+          <property name="hibernate.hbm2ddl.auto" value="validate"/>
         </properties>
     </persistence-unit>
 </persistence>

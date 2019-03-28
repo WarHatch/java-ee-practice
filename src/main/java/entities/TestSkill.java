@@ -1,5 +1,6 @@
 package entities;
 
+import interceptors.Logged;
 import lombok.*;
 
 import javax.enterprise.inject.Alternative;
@@ -11,9 +12,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true, exclude = "heroes")
-@ToString
+@ToString(callSuper = true)
 @Entity
-@Table(name = "Skill")
 @Alternative
 public class TestSkill extends Skill implements Serializable {
     protected String pictureUrl = "https://via.placeholder.com/150";

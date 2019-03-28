@@ -14,7 +14,7 @@
     <h2>Heroes:</h2>
     <ol>
         <ui:repeat value="#{heroes.allHeroes}" var="hero">
-            <li>#{hero.name}</li>
+            <li>#{hero.name} (id:#{hero.id})</li>
             <ol>
                 <ui:repeat value="#{heroes.getHeroSkills(hero.id)}" var="skill">
                     <li>#{skill.toString()}</li>

@@ -9,4 +9,8 @@
   <alternatives>
     <class>entities.TestSkill</class>
   </alternatives>
+
+  <interceptors>
+    <class>interceptors.LoggedImpl</class>
+  </interceptors>
 </beans>

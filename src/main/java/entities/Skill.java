@@ -1,7 +1,10 @@
 package entities;
 
+import interceptors.Logged;
+
 import lombok.*;
 
+import javax.enterprise.inject.Default;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -21,6 +24,7 @@ import java.util.Set;
         query = "select distinct sk from Skill as sk join sk.heroes as hero join hero.skills as skill where hero.id = :heroId")
 })
 @Table
+@Default
 public class Skill extends IdEntity implements Serializable{
     @Column(unique = true)
     @Size(max = 50)
@@ -36,11 +40,13 @@ public class Skill extends IdEntity implements Serializable{
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "skills")
     protected Set<Hero> heroes = new HashSet<>();
 
+    @Logged
     public void addHero(Hero hero) {
         heroes.add(hero);
         hero.getSkills().add(this);
     }
 
+    @Logged
     public void removeHero(Hero hero) {
         heroes.remove(hero);
         hero.getSkills().remove(this);

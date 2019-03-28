@@ -13,7 +13,7 @@ import java.util.List;
 
 import lombok.Getter;
 
-@Model //RequestScoped
+@Model //RequestScoped and Named
 public class HeroSkill {
 
     @Inject
@@ -21,8 +21,8 @@ public class HeroSkill {
     @Inject
     private HeroesDAO heroesDAO;
 
-    @Inject
     @Getter
+    @Inject
     private Skill skill;
     @Getter
     private Hero hero = new Hero();
