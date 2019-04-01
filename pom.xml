@@ -10,7 +10,6 @@
   <packaging>war</packaging>
 
   <name>JavaEEPractice Maven Webapp</name>
-  <!-- TODO change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>

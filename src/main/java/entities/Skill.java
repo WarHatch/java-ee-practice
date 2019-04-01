@@ -14,18 +14,18 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true,  exclude="heroes")
+@EqualsAndHashCode(callSuper = true, exclude = "heroes")
 @ToString
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Skill.findAll", query = "select a from Skill as a"),
-    @NamedQuery(name = "Skill.findById", query = "select a from Skill as a where a.id = :skillId"),
-    @NamedQuery(name = "Skill.findAllByHeroId",
-        query = "select distinct sk from Skill as sk join sk.heroes as hero join hero.skills as skill where hero.id = :heroId")
+        @NamedQuery(name = "Skill.findAll", query = "select a from Skill as a"),
+        @NamedQuery(name = "Skill.findById", query = "select a from Skill as a where a.id = :skillId"),
+        @NamedQuery(name = "Skill.findAllByHeroId",
+                query = "select distinct sk from Skill as sk join sk.heroes as hero join hero.skills as skill where hero.id = :heroId")
 })
 @Table
 @Default
-public class Skill extends IdEntity implements Serializable{
+public class Skill extends IdEntity implements Serializable {
     @Column(unique = true)
     @Size(max = 50)
     protected String name;
@@ -40,13 +40,15 @@ public class Skill extends IdEntity implements Serializable{
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "skills")
     protected Set<Hero> heroes = new HashSet<>();
 
-    @Logged
+    //    @Logged
+    /* FIXME: allowing an entity method to be intercepted causes an exception in hibernate...firePersist()
+     *  "TransactionalException: Unknown entity: entities.testSkill$$OwbInterceptProxy0"
+     */
     public void addHero(Hero hero) {
         heroes.add(hero);
         hero.getSkills().add(this);
     }
 
-    @Logged
     public void removeHero(Hero hero) {
         heroes.remove(hero);
         hero.getSkills().remove(this);

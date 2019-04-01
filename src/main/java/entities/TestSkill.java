@@ -10,7 +10,6 @@ import java.io.Serializable;
 
 @NoArgsConstructor
 @Getter
-@Setter
 @EqualsAndHashCode(callSuper = true, exclude = "heroes")
 @ToString(callSuper = true)
 @Entity

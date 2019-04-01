@@ -2,6 +2,7 @@ package usecases.cdi.jpa;
 
 import entities.Hero;
 import entities.Skill;
+import interceptors.Logged;
 import persistence.HeroesDAO;
 import persistence.SkillsDAO;
 
@@ -39,6 +40,7 @@ public class HeroSkill {
         this.heroesOfSkill = skillsDAO.getSkillHeroes(this.skill.getId());
     }
 
+    @Logged
     @Transactional
     public void mapHeroToSkill() {
         Hero hero = heroesDAO.loadOne(this.hero.getId());
@@ -47,6 +49,7 @@ public class HeroSkill {
         skillsDAO.merge(skill);
     }
 
+    @Logged
     @Transactional
     public String createSkillOfHero(){
         // Hero must use GenerationType.IDENTITY to ensure id starts from 1

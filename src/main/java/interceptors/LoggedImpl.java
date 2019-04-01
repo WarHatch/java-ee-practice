@@ -10,13 +10,18 @@ import javax.interceptor.InvocationContext;
 @Logged
 @Interceptor
 public class LoggedImpl {
-
     @AroundInvoke
     public Object logEvent(InvocationContext context) throws Exception {
         //Pre method fire
+
+
+        //Fire method
+        Object result = context.proceed();
+
+        //Post method fire
         System.out.println(context.getTarget().toString() + " CALLED " + context.getMethod().toString());
 
-        return context.proceed();
+        return result;
     }
 
 }
