@@ -40,8 +40,12 @@
             <h:inputText value="#{creatures.statToCreate.threat}" required="true"/>
             <h:inputText value="#{creatures.statToCreate.attack}" required="true"/>
             <h:inputText value="#{creatures.statToCreate.health}" required="true"/>
-            <h:commandButton value="Add new stat" action="#{creatures.createStat}"/>
         </h:panelGrid>
+        <p>Special attribute</p>
+        <h:inputText value="#{creatures.statToCreate.specialAttribute}" required="false"/>
+
+        <h:commandButton value="Add new stat" action="#{creatures.createStat}"/>
+        <p:messages/>
     </h:form>
 </h:body>
 </html>

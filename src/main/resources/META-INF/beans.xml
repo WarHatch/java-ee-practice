@@ -13,4 +13,8 @@
   <interceptors>
     <class>interceptors.LoggedImpl</class>
   </interceptors>
+
+  <decorators>
+    <class>decorators.StatMappingDecorator</class>
+  </decorators>
 </beans>

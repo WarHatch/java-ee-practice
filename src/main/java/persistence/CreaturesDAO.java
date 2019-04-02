@@ -3,13 +3,14 @@ package persistence;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 import java.util.List;
 
 import entities.Creature;
 import entities.Stat;
 
 @ApplicationScoped
-public class CreaturesDAO {
+public class CreaturesDAO implements Serializable {
     @PersistenceContext
     protected EntityManager em;
 

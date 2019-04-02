@@ -28,7 +28,6 @@
     <navigation-rule>
         <from-view-id>/creatures.xhtml</from-view-id>
         <navigation-case>
-            <from-action>#{creatureWithStat.createCreature}</from-action>
             <from-outcome>success</from-outcome>
             <to-view-id>/creatures.xhtml</to-view-id>
             <redirect/>

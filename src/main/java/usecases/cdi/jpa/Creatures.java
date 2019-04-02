@@ -21,7 +21,7 @@ import java.util.concurrent.Future;
 
 @Named
 @ViewScoped //Application scope would allow to see preloaded asyncCreatureCount
-public class Creatures implements Serializable {
+public class Creatures implements Serializable, ICreateStat {
 
     @Inject
     private CreaturesDAO creaturesDAO;
@@ -73,7 +73,7 @@ public class Creatures implements Serializable {
         return creaturesDAO.loadCreatureStats(creatureId);
     }
 
-    @Transactional
+
     public String createCreature(){
         this.creaturesDAO.persist(creatureToCreate);
         return "success";
