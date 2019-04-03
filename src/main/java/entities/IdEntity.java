@@ -3,6 +3,7 @@ package entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @MappedSuperclass
+@ToString
 public abstract class IdEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

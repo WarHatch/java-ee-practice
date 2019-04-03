@@ -6,7 +6,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import entities.Hero;
-import entities.Skill;
+import entities.ISkill;
 
 @ApplicationScoped
 public class SkillsDAO {
@@ -17,12 +17,12 @@ public class SkillsDAO {
         this.em = em;
     }
 
-    public List<Skill> loadAll() {
-        return em.createNamedQuery("Skill.findAll", Skill.class).getResultList();
+    public List<ISkill> loadAll() {
+        return em.createNamedQuery("Skill.findAll", ISkill.class).getResultList();
     }
 
-    public Skill loadOne(int skillId) {
-        return em.createNamedQuery("Skill.findById", Skill.class)
+    public ISkill loadOne(int skillId) {
+        return em.createNamedQuery("Skill.findById", ISkill.class)
                 .setParameter("skillId", skillId)
                 .getSingleResult();
     }
@@ -33,11 +33,11 @@ public class SkillsDAO {
                 .getResultList();
     }
 
-    public void persist(Skill skill) {
+    public void persist(ISkill skill) {
         this.em.persist(skill);
     }
 
-    public void merge(Skill skill) {
+    public void merge(ISkill skill) {
         this.em.merge(skill);
     }
 }

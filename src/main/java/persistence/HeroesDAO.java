@@ -6,7 +6,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import entities.Hero;
-import entities.Skill;
+import entities.ISkill;
 
 @ApplicationScoped
 public class HeroesDAO {
@@ -27,8 +27,8 @@ public class HeroesDAO {
             .getSingleResult();
     }
 
-    public List<Skill> getHeroSkills(int heroId) {
-        List<Skill> results = em.createNamedQuery("Skill.findAllByHeroId", Skill.class)
+    public List<ISkill> getHeroSkills(int heroId) {
+        List<ISkill> results = em.createNamedQuery("Skill.findAllByHeroId", ISkill.class)
                 .setParameter("heroId", heroId)
                 .getResultList();
         return results;

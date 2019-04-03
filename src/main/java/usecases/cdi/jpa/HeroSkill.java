@@ -1,12 +1,14 @@
 package usecases.cdi.jpa;
 
 import entities.Hero;
+import entities.ISkill;
 import entities.Skill;
 import interceptors.Logged;
 import persistence.HeroesDAO;
 import persistence.SkillsDAO;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -22,9 +24,9 @@ public class HeroSkill {
     @Inject
     private HeroesDAO heroesDAO;
 
-    @Getter
     @Inject
-    private Skill skill;
+    @Getter
+    private ISkill skill;
     @Getter
     private Hero hero = new Hero();
 
@@ -44,7 +46,7 @@ public class HeroSkill {
     @Transactional
     public void mapHeroToSkill() {
         Hero hero = heroesDAO.loadOne(this.hero.getId());
-        Skill skill = skillsDAO.loadOne(this.skill.getId());
+        ISkill skill = skillsDAO.loadOne(this.skill.getId());
         skill.addHero(hero);
         skillsDAO.merge(skill);
     }

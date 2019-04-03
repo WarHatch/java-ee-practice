@@ -1,6 +1,6 @@
 package usecases.cdi.jpa;
 
-import entities.Skill;
+import entities.ISkill;
 import lombok.Getter;
 import persistence.SkillsDAO;
 
@@ -17,7 +17,7 @@ public class Skills implements Serializable {
     private SkillsDAO skillsDAO;
 
     @Getter
-    private List<Skill> allSkills;
+    private List<ISkill> allSkills;
 
     @PostConstruct
     public void init(){

@@ -1,13 +1,10 @@
 package entities;
 
-import interceptors.Logged;
-
 import lombok.*;
 
 import javax.enterprise.inject.Default;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true, exclude = "heroes")
-@ToString
+@ToString(callSuper = true)
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Skill.findAll", query = "select a from Skill as a"),
@@ -24,8 +21,7 @@ import java.util.Set;
                 query = "select distinct sk from Skill as sk join sk.heroes as hero join hero.skills as skill where hero.id = :heroId")
 })
 @Table
-@Default
-public class Skill extends IdEntity implements Serializable {
+public class Skill extends IdEntity implements ISkill {
     @Column(unique = true)
     @Size(max = 50)
     protected String name;
@@ -40,15 +36,13 @@ public class Skill extends IdEntity implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "skills")
     protected Set<Hero> heroes = new HashSet<>();
 
-    //    @Logged
-    /* FIXME: allowing an entity method to be intercepted causes an exception in hibernate...firePersist()
-     *  "TransactionalException: Unknown entity: entities.testSkill$$OwbInterceptProxy0"
-     */
+    @Override
     public void addHero(Hero hero) {
         heroes.add(hero);
         hero.getSkills().add(this);
     }
 
+    @Override
     public void removeHero(Hero hero) {
         heroes.remove(hero);
         hero.getSkills().remove(this);

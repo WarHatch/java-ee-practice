@@ -1,7 +1,7 @@
 package usecases.cdi.jpa;
 
 import entities.Hero;
-import entities.Skill;
+import entities.ISkill;
 import lombok.Getter;
 import lombok.Setter;
 import persistence.HeroesDAO;
@@ -41,7 +41,7 @@ public class Heroes implements Serializable {
 
     public Hero getHero(int heroId) { return heroesDAO.loadOne(heroId); }
 
-    public List<Skill> getHeroSkills(int heroId){
+    public List<ISkill> getHeroSkills(int heroId) {
         return heroesDAO.getHeroSkills(heroId);
     }
 

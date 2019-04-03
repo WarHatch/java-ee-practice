@@ -35,6 +35,8 @@
         <h:inputText value="#{heroSkill.skill.name}" required="true" />
         <p>description</p>
         <h:inputText value="#{heroSkill.skill.description}" required="true" />
+        <p>img uri</p>
+        <h:inputText value="#{heroSkill.skill.pictureUrl}" required="true"/>
         <p>levelRequirement (optional)</p>
         <h:inputText value="#{heroSkill.skill.levelRequirement}" required="false" />
         <h:commandButton value="Add skill" action="#{heroSkill.createSkillOfHero}" />
