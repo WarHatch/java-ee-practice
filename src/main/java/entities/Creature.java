@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import lombok.*;
 
@@ -15,6 +16,7 @@ import lombok.*;
         @NamedQuery(name = "Creature.count", query = "select count(a) from Creature as a")
 })
 @Table
+@XmlRootElement
 public class Creature extends IdEntity implements Serializable {
     @Size(max = 50)
     private String name;
