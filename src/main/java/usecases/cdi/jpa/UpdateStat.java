@@ -18,7 +18,6 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-//@Model //Req scoped and Named
 @Named
 @ViewScoped
 public class UpdateStat implements Serializable {
@@ -64,7 +63,7 @@ public class UpdateStat implements Serializable {
         }
     }
 
-    @Transactional
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void overwriteStat() {
         statToUpdate.setOptLockVersion(conflictingStat.getOptLockVersion());
         updateSelectedStat();

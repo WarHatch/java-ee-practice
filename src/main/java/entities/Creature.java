@@ -16,7 +16,7 @@ import lombok.*;
         @NamedQuery(name = "Creature.count", query = "select count(a) from Creature as a")
 })
 @Table
-@XmlRootElement
+@XmlRootElement //TODO: test this out
 public class Creature extends IdEntity implements Serializable {
     @Size(max = 50)
     private String name;

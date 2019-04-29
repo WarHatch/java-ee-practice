@@ -3,6 +3,7 @@ package usecases.cdi.jpa;
 import asynchronous.AsyncComponent;
 import entities.Creature;
 import entities.Stat;
+import lombok.val;
 import persistence.CreaturesDAO;
 import persistence.StatsDAO;
 
@@ -11,6 +12,7 @@ import javax.annotation.PostConstruct;
 
 import org.omnifaces.cdi.ViewScoped;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -20,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 @Named
-@ViewScoped //Application scope would allow to see preloaded asyncCreatureCount
+@ApplicationScoped //Application scope would allow to see preloaded asyncCreatureCount. Can also use @ViewScoped
 public class Creatures implements Serializable, ICreateStat {
 
     @Inject
@@ -33,7 +35,7 @@ public class Creatures implements Serializable, ICreateStat {
     @Getter
     private List<Creature> allCreatures;
 
-    private Future<String> asyncCreatureCount;
+    private Future<String> asyncCreatureCount = null;
 
     @Getter
     private Creature creatureToCreate = new Creature();
@@ -43,11 +45,6 @@ public class Creatures implements Serializable, ICreateStat {
     @PostConstruct
     public void init(){
         loadCreatures();
-        try {
-            getAsyncCreatureCount();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void loadCreatures() {
@@ -73,7 +70,7 @@ public class Creatures implements Serializable, ICreateStat {
         return creaturesDAO.loadCreatureStats(creatureId);
     }
 
-
+    @Transactional
     public String createCreature(){
         this.creaturesDAO.persist(creatureToCreate);
         return "success";

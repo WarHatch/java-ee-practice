@@ -4,7 +4,6 @@ import entities.Stat;
 import persistence.CreaturesDAO;
 
 import lombok.*;
-import persistence.StatsDAO;
 import usecases.cdi.jpa.Creatures;
 import usecases.cdi.jpa.ICreateStat;
 
@@ -24,8 +23,6 @@ public class StatMappingDecorator implements ICreateStat, Serializable {
 
     @Inject
     CreaturesDAO creaturesDAO;
-    @Inject
-    StatsDAO statsDAO;
 
     @Transactional
     public String createStat() {
